@@ -1,0 +1,50 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="95" fill="#0080ff" stroke="#0056b3" stroke-width="2"/>
+  
+  <!-- Calendar icon -->
+  <rect x="60" y="50" width="80" height="60" rx="4" fill="white" stroke="#0056b3" stroke-width="2"/>
+  
+  <!-- Calendar binding holes -->
+  <circle cx="70" cy="45" r="2" fill="#0056b3"/>
+  <circle cx="80" cy="45" r="2" fill="#0056b3"/>
+  <circle cx="90" cy="45" r="2" fill="#0056b3"/>
+  <circle cx="100" cy="45" r="2" fill="#0056b3"/>
+  <circle cx="110" cy="45" r="2" fill="#0056b3"/>
+  <circle cx="120" cy="45" r="2" fill="#0056b3"/>
+  <circle cx="130" cy="45" r="2" fill="#0056b3"/>
+  
+  <!-- Calendar grid lines -->
+  <line x1="60" y1="70" x2="140" y2="70" stroke="#0056b3" stroke-width="1"/>
+  <line x1="60" y1="80" x2="140" y2="80" stroke="#0056b3" stroke-width="1"/>
+  <line x1="60" y1="90" x2="140" y2="90" stroke="#0056b3" stroke-width="1"/>
+  <line x1="60" y1="100" x2="140" y2="100" stroke="#0056b3" stroke-width="1"/>
+  <line x1="60" y1="110" x2="140" y2="110" stroke="#0056b3" stroke-width="1"/>
+  
+  <!-- Vertical grid lines -->
+  <line x1="70" y1="50" x2="70" y2="110" stroke="#0056b3" stroke-width="1"/>
+  <line x1="80" y1="50" x2="80" y2="110" stroke="#0056b3" stroke-width="1"/>
+  <line x1="90" y1="50" x2="90" y2="110" stroke="#0056b3" stroke-width="1"/>
+  <line x1="100" y1="50" x2="100" y2="110" stroke="#0056b3" stroke-width="1"/>
+  <line x1="110" y1="50" x2="110" y2="110" stroke="#0056b3" stroke-width="1"/>
+  <line x1="120" y1="50" x2="120" y2="110" stroke="#0056b3" stroke-width="1"/>
+  <line x1="130" y1="50" x2="130" y2="110" stroke="#0056b3" stroke-width="1"/>
+  
+  <!-- Sync arrows -->
+  <path d="M 40 100 L 55 100" stroke="white" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 145 100 L 160 100" stroke="white" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="white"/>
+    </marker>
+  </defs>
+  
+  <!-- Cloud icons -->
+  <path d="M 30 80 Q 25 75 30 70 Q 35 65 40 70 Q 45 60 50 65 Q 55 60 60 70 Q 65 75 60 80 Z" fill="white"/>
+  <path d="M 140 80 Q 135 75 140 70 Q 145 65 150 70 Q 155 60 160 65 Q 165 60 170 70 Q 175 75 170 80 Z" fill="white"/>
+  
+  <!-- Text -->
+  <text x="100" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white">Calendar Sync</text>
+</svg>
