@@ -5,9 +5,9 @@
 
 <img src="readmeai/assets/logos/blue.svg" width="30%" style="position: absolute; top: 0; right: 0;" alt="Project Logo"/>
 
-# CALENDAR-SYNC.GIT
+# Calendar Sync
 
-<em>Seamlessly Unify Your Calendars, Elevate Your Productivity<em>
+<em>Seamlessly Unify Your Google and iCloud Calendars<em>
 
 <!-- BADGES -->
 <img src="https://img.shields.io/github/license/a-laz/calendar-sync.git?style=flat-square&logo=opensourceinitiative&logoColor=white&color=0080ff" alt="license">
@@ -52,17 +52,18 @@
 
 ## 🌞 Overview
 
-calendar-sync.git is your ultimate solution for seamless calendar integration, bridging Google Calendar and iCloud with ease.
+Calendar Sync is a powerful Python application that automatically synchronizes events between Google Calendar and iCloud Calendar, ensuring your schedules stay consistent across both platforms.
 
-**Why calendar-sync.git?**
+**Why Calendar Sync?**
 
-This project enhances personal productivity through efficient calendar management. The core features include:
+This project solves the common problem of managing multiple calendar platforms. The core features include:
 
-- **🔄 Seamless Synchronization:** Ensures consistent data across Google Calendar and iCloud.
-- **↔️ Flexible Sync Options:** Offers one-way or two-way synchronization with customizable time windows.
-- **🚀 Automated Deployment:** Deploys as a Google Cloud Function with hourly triggers for continuous operation.
-- **⚙️ Robust Configuration:** Utilizes environment variables for dynamic synchronization settings.
-- **📦 Dependency Management:** Ensures compatibility and stability with carefully specified Python packages.
+- **🔄 Two-Way Synchronization:** Automatically syncs events in both directions between Google Calendar and iCloud
+- **⚡ Real-Time Updates:** Keeps your calendars in sync with hourly automated runs via Google Cloud Functions
+- **🔍 Dry Run Mode:** Preview changes before applying them to ensure accuracy
+- **⏰ Customizable Time Windows:** Sync events from the past 90 days to future 365 days
+- **🔐 Secure Authentication:** Uses OAuth2 for Google and App-Specific Passwords for iCloud
+- **☁️ Cloud Deployment:** Runs automatically on Google Cloud Functions with Cloud Scheduler
 
 ---
 
@@ -162,59 +163,92 @@ This project requires the following dependencies:
 
 ### ⚡ Installation
 
-Build calendar-sync.git from the source and intsall dependencies:
+#### Quick Setup
+```sh
+# Clone the repository
+git clone https://github.com/a-laz/calendar-sync.git
+cd calendar-sync
 
-1. **Clone the repository:**
+# Set up environment
+cp .env-example .env
+# Edit .env with your credentials
 
-    ```sh
-    ❯ git clone https://github.com/a-laz/calendar-sync.git
-    ```
+# Install dependencies
+pip install -r cloud_deploy/requirements.txt
+```
 
-2. **Navigate to the project directory:**
+#### Prerequisites
+- **Google Account**: With Calendar API enabled
+- **iCloud Account**: With App-Specific Password generated
+- **Python 3.7+**: For local development
+- **Google Cloud Account**: For cloud deployment
 
-    ```sh
-    ❯ cd calendar-sync.git
-    ```
+#### Environment Variables
+Copy `.env-example` to `.env` and configure:
 
-3. **Install the dependencies:**
+```bash
+# Google Calendar
+GOOGLE_CALENDAR_ID=primary
 
-<!-- SHIELDS BADGE CURRENTLY DISABLED -->
-	<!-- [![pip][pip-shield]][pip-link] -->
-	<!-- REFERENCE LINKS -->
-	<!-- [pip-shield]: https://img.shields.io/badge/Pip-3776AB.svg?style={badge_style}&logo=pypi&logoColor=white -->
-	<!-- [pip-link]: https://pypi.org/project/pip/ -->
+# iCloud Calendar (use App-Specific Password)
+ICLOUD_USERNAME=your_email@icloud.com
+ICLOUD_PASSWORD=your_app_specific_password
 
-	**Using [pip](https://pypi.org/project/pip/):**
-
-	```sh
-	❯ pip install -r cloud_deploy/requirements.txt
-	```
+# Sync Configuration
+SYNC_DIRECTION=two_way
+DRY_RUN=false
+WINDOW_PAST_DAYS=90
+WINDOW_FUTURE_DAYS=365
+```
 
 ### 🔆 Usage
 
-Run the project with:
-
-**Using [pip](https://pypi.org/project/pip/):**
+#### Local Development
 ```sh
-python {entrypoint}
+# Set up environment variables
+cp .env-example .env
+# Edit .env with your credentials
+
+# Run the sync locally
+python sync_calendars.py
+```
+
+#### Cloud Deployment
+```sh
+# Deploy to Google Cloud Functions
+./cloud_deploy.sh
+
+# The function will run automatically every hour
+# Check logs with:
+gcloud functions logs read calendar-sync-v2 --region us-central1
 ```
 
 ### 🌠 Testing
 
-Calendar-sync.git uses the {__test_framework__} test framework. Run the test suite with:
+Test the sync functionality:
 
-**Using [pip](https://pypi.org/project/pip/):**
 ```sh
-pytest
+# Test with dry run mode
+export DRY_RUN=true
+python sync_calendars.py
+
+# Test specific time window
+export WINDOW_PAST_DAYS=7
+export WINDOW_FUTURE_DAYS=30
+python sync_calendars.py
 ```
 
 ---
 
 ## 🌻 Roadmap
 
-- [X] **`Task 1`**: <strike>Implement feature one.</strike>
-- [ ] **`Task 2`**: Implement feature two.
-- [ ] **`Task 3`**: Implement feature three.
+- [X] **Two-way Calendar Sync**: ✅ Implemented bidirectional synchronization between Google Calendar and iCloud
+- [X] **Cloud Deployment**: ✅ Deployed to Google Cloud Functions with automated scheduling
+- [X] **Environment Configuration**: ✅ Added secure credential management with .env support
+- [ ] **Event Conflict Resolution**: Handle conflicts when events are modified on both platforms
+- [ ] **Recurring Event Support**: Enhanced support for complex recurring event patterns
+- [ ] **Web Dashboard**: Create a web interface for monitoring sync status and managing settings
+- [ ] **Mobile App**: Develop a mobile app for on-the-go calendar management
 
 ---
 
