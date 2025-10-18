@@ -278,51 +278,44 @@ python sync_calendars.py
 
 ##### Deploy to Google Cloud Functions
 
-**⚠️ Important: Update `cloud_deploy.sh` before deploying**
+**🔒 Secure Deployment Process**
 
-The current `cloud_deploy.sh` contains hardcoded values that need to be updated:
+The deployment script now uses environment variables to keep credentials secure:
 
-```sh
-# Current values in cloud_deploy.sh (UPDATE THESE):
-PROJECT_ID="firm-braid-475420-p9"  # ← Change to your project ID
-ICLOUD_USERNAME=alex.m.lazarev@gmail.com  # ← Change to your iCloud email
-ICLOUD_PASSWORD=blkw-gsdq-qzts-bhfa  # ← Change to your app-specific password
-```
-
-**Required Updates:**
-
-1. **Update Project ID**
+1. **Update Project ID in `cloud_deploy.sh`**
    ```sh
-   # Line 3 in cloud_deploy.sh
-   PROJECT_ID="your-google-cloud-project-id"
+   # Edit line 4 in cloud_deploy.sh
+   PROJECT_ID="your-google-cloud-project-id"  # ← UPDATE: Your Google Cloud Project ID
    ```
 
-2. **Update iCloud Credentials**
+2. **Set Environment Variables (SECURE METHOD)**
    ```sh
-   # Line 20 in cloud_deploy.sh - update the --set-env-vars section:
-   --set-env-vars GOOGLE_CALENDAR_ID=primary,ICLOUD_USERNAME=your_email@icloud.com,ICLOUD_PASSWORD=your_app_specific_password,SYNC_DIRECTION=two_way,DRY_RUN=false,WINDOW_PAST_DAYS=90,WINDOW_FUTURE_DAYS=365
+   # Set your iCloud credentials as environment variables
+   export ICLOUD_USERNAME="your_email@icloud.com"
+   export ICLOUD_PASSWORD="your_app_specific_password"
+   
+   # Optional: Set other configuration
+   export SYNC_DIRECTION="two_way"
+   export DRY_RUN="false"
+   export WINDOW_PAST_DAYS="90"
+   export WINDOW_FUTURE_DAYS="365"
    ```
 
-3. **Optional: Update Function Name and Region**
+3. **Deploy the Function**
    ```sh
-   # Lines 4-5 in cloud_deploy.sh
-   FUNCTION_NAME="calendar-sync"  # Keep or change as needed
-   REGION="us-central1"           # Choose your preferred region
+   # Make sure you're authenticated with Google Cloud
+   gcloud auth login
+   gcloud config set project YOUR_PROJECT_ID
+   
+   # Deploy to Google Cloud Functions
+   ./cloud_deploy.sh
    ```
 
-**Deploy the function:**
-```sh
-# Make sure you're authenticated with Google Cloud
-gcloud auth login
-gcloud config set project YOUR_PROJECT_ID
-
-# Deploy to Google Cloud Functions
-./cloud_deploy.sh
-
-# The function will run automatically every hour
-# Check logs with:
-gcloud functions logs read calendar-sync --region us-central1
-```
+**🔐 Security Benefits:**
+- ✅ No hardcoded credentials in the script
+- ✅ Environment variables are not stored in version control
+- ✅ Script validates required variables before deployment
+- ✅ Credentials are only passed to Google Cloud Functions securely
 
 ##### Post-Deployment Verification
 
