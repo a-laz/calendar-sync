@@ -233,13 +233,111 @@ python sync_calendars.py
 ```
 
 #### Cloud Deployment
+
+##### Prerequisites for Cloud Deployment
+
+1. **Google Cloud Project Setup**
+   - Create a Google Cloud Project
+   - Enable the following APIs:
+     - Google Calendar API
+     - Cloud Functions API
+     - Cloud Scheduler API
+   - Set up billing for your project
+
+2. **Google Calendar API Credentials**
+   
+   **Option A: OAuth2 Client (Recommended for personal use)**
+   ```sh
+   # 1. Go to Google Cloud Console > APIs & Services > Credentials
+   # 2. Click "Create Credentials" > "OAuth client ID"
+   # 3. Choose "Desktop application"
+   # 4. Download the JSON file and rename it to:
+   #    client_secret_<your-client-id>.apps.googleusercontent.com.json
+   # 5. Place it in your project root directory
+   ```
+
+   **Option B: Service Account (For automated deployment)**
+   ```sh
+   # 1. Go to Google Cloud Console > APIs & Services > Credentials
+   # 2. Click "Create Credentials" > "Service account"
+   # 3. Create a service account and download the JSON key
+   # 4. Rename it to: service-account-key.json
+   # 5. Place it in your project root directory
+   # 6. Share your Google Calendar with the service account email
+   ```
+
+3. **iCloud App-Specific Password**
+   ```sh
+   # 1. Go to https://appleid.apple.com/account/manage
+   # 2. Sign in with your Apple ID
+   # 3. Go to "Security" section
+   # 4. Click "Generate Password" under "App-Specific Passwords"
+   # 5. Enter a label like "Calendar Sync"
+   # 6. Copy the generated password (format: xxxx-xxxx-xxxx-xxxx)
+   ```
+
+##### Deploy to Google Cloud Functions
+
+**⚠️ Important: Update `cloud_deploy.sh` before deploying**
+
+The current `cloud_deploy.sh` contains hardcoded values that need to be updated:
+
 ```sh
+# Current values in cloud_deploy.sh (UPDATE THESE):
+PROJECT_ID="firm-braid-475420-p9"  # ← Change to your project ID
+ICLOUD_USERNAME=alex.m.lazarev@gmail.com  # ← Change to your iCloud email
+ICLOUD_PASSWORD=blkw-gsdq-qzts-bhfa  # ← Change to your app-specific password
+```
+
+**Required Updates:**
+
+1. **Update Project ID**
+   ```sh
+   # Line 3 in cloud_deploy.sh
+   PROJECT_ID="your-google-cloud-project-id"
+   ```
+
+2. **Update iCloud Credentials**
+   ```sh
+   # Line 20 in cloud_deploy.sh - update the --set-env-vars section:
+   --set-env-vars GOOGLE_CALENDAR_ID=primary,ICLOUD_USERNAME=your_email@icloud.com,ICLOUD_PASSWORD=your_app_specific_password,SYNC_DIRECTION=two_way,DRY_RUN=false,WINDOW_PAST_DAYS=90,WINDOW_FUTURE_DAYS=365
+   ```
+
+3. **Optional: Update Function Name and Region**
+   ```sh
+   # Lines 4-5 in cloud_deploy.sh
+   FUNCTION_NAME="calendar-sync"  # Keep or change as needed
+   REGION="us-central1"           # Choose your preferred region
+   ```
+
+**Deploy the function:**
+```sh
+# Make sure you're authenticated with Google Cloud
+gcloud auth login
+gcloud config set project YOUR_PROJECT_ID
+
 # Deploy to Google Cloud Functions
 ./cloud_deploy.sh
 
 # The function will run automatically every hour
 # Check logs with:
-gcloud functions logs read calendar-sync-v2 --region us-central1
+gcloud functions logs read calendar-sync --region us-central1
+```
+
+##### Post-Deployment Verification
+
+```sh
+# Test the function manually
+gcloud functions call calendar-sync --region us-central1
+
+# Check function status
+gcloud functions describe calendar-sync --region us-central1
+
+# View recent logs
+gcloud functions logs read calendar-sync --region us-central1 --limit 50
+
+# Check scheduler job
+gcloud scheduler jobs list --location us-central1
 ```
 
 ### 🌠 Testing
