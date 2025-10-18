@@ -285,8 +285,8 @@ The current `cloud_deploy.sh` contains hardcoded values that need to be updated:
 ```sh
 # Current values in cloud_deploy.sh (UPDATE THESE):
 PROJECT_ID="firm-braid-475420-p9"  # ← Change to your project ID
-ICLOUD_USERNAME=alex.m.lazarev@gmail.com  # ← Change to your iCloud email
-ICLOUD_PASSWORD=blkw-gsdq-qzts-bhfa  # ← Change to your app-specific password
+ICLOUD_USERNAME=XXXXX  # ← Change to your iCloud email
+ICLOUD_PASSWORD=XXXXX  # ← Change to your app-specific password
 ```
 
 **Required Updates:**
