@@ -3,17 +3,17 @@
 <!-- HEADER STYLE: MODERN -->
 <div align="left" style="position: relative; width: 100%; height: 100%; ">
 
-<img src="readmeai/assets/logos/blue.svg" width="30%" style="position: absolute; top: 0; right: 0;" alt="Project Logo"/>
+<img src="logo.svg" width="30%" style="position: absolute; top: 0; right: 0;" alt="Project Logo"/>
 
 # Calendar Sync
 
 <em>Seamlessly Unify Your Google and iCloud Calendars<em>
 
 <!-- BADGES -->
-<img src="https://img.shields.io/github/license/a-laz/calendar-sync.git?style=flat-square&logo=opensourceinitiative&logoColor=white&color=0080ff" alt="license">
-<img src="https://img.shields.io/github/last-commit/a-laz/calendar-sync.git?style=flat-square&logo=git&logoColor=white&color=0080ff" alt="last-commit">
-<img src="https://img.shields.io/github/languages/top/a-laz/calendar-sync.git?style=flat-square&color=0080ff" alt="repo-top-language">
-<img src="https://img.shields.io/github/languages/count/a-laz/calendar-sync.git?style=flat-square&color=0080ff" alt="repo-language-count">
+<img src="https://img.shields.io/github/license/user/calendar?style=flat-square&logo=opensourceinitiative&logoColor=white&color=0080ff" alt="license">
+<img src="https://img.shields.io/github/last-commit/user/calendar?style=flat-square&logo=git&logoColor=white&color=0080ff" alt="last-commit">
+<img src="https://img.shields.io/github/languages/top/user/calendar?style=flat-square&color=0080ff" alt="repo-top-language">
+<img src="https://img.shields.io/github/languages/count/user/calendar?style=flat-square&color=0080ff" alt="repo-language-count">
 
 <em>Built with the tools and technologies:</em>
 
@@ -69,18 +69,33 @@ This project solves the common problem of managing multiple calendar platforms. 
 
 ## 🔥 Features
 
-|      | Component       | Details                              |
-| :--- | :-------------- | :----------------------------------- |
-| ⚙️  | **Architecture**  | <ul><li>Monolithic</li><li>Python-based</li><li>Script-driven</li></ul> |
-| 🔩 | **Code Quality**  | <ul><li>PEP 8 compliant</li><li>Lacks linters</li><li>Minimal comments</li></ul> |
-| 📄 | **Documentation** | <ul><li>No README.md</li><li>No inline documentation</li><li>Missing usage examples</li></ul> |
-| 🔌 | **Integrations**  | <ul><li>CalDAV</li><li>Google Calendar API</li><li>OAuth 2.0</li></ul> |
-| 🧩 | **Modularity**    | <ul><li>Single script</li><li>Low cohesion</li><li>High coupling</li></ul> |
-| 🧪 | **Testing**       | <ul><li>No test suite</li><li>No test coverage</li><li>Manual testing required</li></ul> |
-| ⚡️  | **Performance**   | <ul><li>Dependent on external APIs</li><li>Network latency impacts</li><li>Single-threaded</li></ul> |
-| 🛡️ | **Security**      | <ul><li>OAuth 2.0 for authentication</li><li>No encryption for local storage</li><li>No security audits</li></ul> |
-| 📦 | **Dependencies**  | <ul><li>Python packages</li><li>Google API Client</li><li>CalDAV</li></ul> |
-| 🚀 | **Scalability**   | <ul><li>Limited by script design</li><li>No load balancing</li><li>Not containerized</li></ul> |
+### 🔄 **Core Synchronization**
+- **Two-Way Sync**: Automatically syncs events between Google Calendar and iCloud Calendar
+- **Real-Time Updates**: Hourly automated synchronization via Google Cloud Functions
+- **Bidirectional Support**: Changes made on either platform are reflected on the other
+
+### ⚙️ **Configuration & Control**
+- **Dry Run Mode**: Preview changes before applying them to ensure accuracy
+- **Customizable Time Windows**: Sync events from past 90 days to future 365 days
+- **Flexible Sync Direction**: Support for one-way or two-way synchronization
+- **Environment-Based Configuration**: Secure credential management with .env support
+
+### 🔐 **Security & Authentication**
+- **OAuth 2.0 Integration**: Secure Google Calendar API authentication
+- **App-Specific Passwords**: Secure iCloud authentication without storing main passwords
+- **Cloud-Native Security**: Leverages Google Cloud's built-in security features
+
+### ☁️ **Cloud Deployment**
+- **Google Cloud Functions**: Serverless execution with automatic scaling
+- **Cloud Scheduler**: Automated hourly execution without manual intervention
+- **Cost-Effective**: Pay-per-execution model with minimal resource usage
+- **Monitoring & Logging**: Built-in Google Cloud logging and monitoring
+
+### 🛠️ **Technical Features**
+- **CalDAV Protocol**: Native iCloud calendar integration
+- **Google Calendar API**: Full access to Google Calendar features
+- **Timezone Handling**: Proper timezone conversion and management
+- **Error Handling**: Robust error handling and retry mechanisms
 ```
 
 ---
@@ -88,12 +103,16 @@ This project solves the common problem of managing multiple calendar platforms. 
 ## 🌅 Project Structure
 
 ```sh
-└── calendar-sync.git/
-    ├── cloud_deploy
+└── calendar-sync/
+    ├── cloud_deploy/
     │   ├── main.py
     │   └── requirements.txt
     ├── cloud_deploy.sh
-    └── sync_calendars.py
+    ├── sync_calendars.py
+    ├── .env-example
+    ├── client_secret_*.json
+    ├── token.json
+    └── logo.svg
 ```
 
 ### 🌄 Project Index
@@ -166,8 +185,8 @@ This project requires the following dependencies:
 #### Quick Setup
 ```sh
 # Clone the repository
-git clone https://github.com/a-laz/calendar-sync.git
-cd calendar-sync
+git clone https://github.com/user/calendar.git
+cd calendar
 
 # Set up environment
 cp .env-example .env
@@ -254,9 +273,9 @@ python sync_calendars.py
 
 ## 🤝 Contributing
 
-- **💬 [Join the Discussions](https://github.com/a-laz/calendar-sync.git/discussions)**: Share your insights, provide feedback, or ask questions.
-- **🐛 [Report Issues](https://github.com/a-laz/calendar-sync.git/issues)**: Submit bugs found or log feature requests for the `calendar-sync.git` project.
-- **💡 [Submit Pull Requests](https://github.com/a-laz/calendar-sync.git/blob/main/CONTRIBUTING.md)**: Review open PRs, and submit your own PRs.
+- **💬 [Join the Discussions](https://github.com/user/calendar/discussions)**: Share your insights, provide feedback, or ask questions.
+- **🐛 [Report Issues](https://github.com/user/calendar/issues)**: Submit bugs found or log feature requests for the calendar project.
+- **💡 [Submit Pull Requests](https://github.com/user/calendar/blob/main/CONTRIBUTING.md)**: Review open PRs, and submit your own PRs.
 
 <details closed>
 <summary>Contributing Guidelines</summary>
@@ -264,7 +283,7 @@ python sync_calendars.py
 1. **Fork the Repository**: Start by forking the project repository to your github account.
 2. **Clone Locally**: Clone the forked repository to your local machine using a git client.
    ```sh
-   git clone https://github.com/a-laz/calendar-sync.git
+   git clone https://github.com/user/calendar.git
    ```
 3. **Create a New Branch**: Always work on a new branch, giving it a descriptive name.
    ```sh
@@ -287,8 +306,8 @@ python sync_calendars.py
 <summary>Contributor Graph</summary>
 <br>
 <p align="left">
-   <a href="https://github.com{/a-laz/calendar-sync.git/}graphs/contributors">
-      <img src="https://contrib.rocks/image?repo=a-laz/calendar-sync.git">
+   <a href="https://github.com/user/calendar/graphs/contributors">
+      <img src="https://contrib.rocks/image?repo=user/calendar">
    </a>
 </p>
 </details>
@@ -297,13 +316,17 @@ python sync_calendars.py
 
 ## 📜 License
 
-Calendar-sync.git is protected under the [LICENSE](https://choosealicense.com/licenses) License. For more details, refer to the [LICENSE](https://choosealicense.com/licenses/) file.
+This project is licensed under the MIT License. For more details, refer to the [LICENSE](LICENSE) file.
 
 ---
 
 ## ✨ Acknowledgments
 
-- Credit `contributors`, `inspiration`, `references`, etc.
+- **Google Calendar API** - For providing robust calendar integration capabilities
+- **iCloud CalDAV** - For enabling seamless iCloud calendar synchronization
+- **Google Cloud Functions** - For serverless execution and automated scheduling
+- **Python Community** - For the excellent libraries that make this project possible
+- **Open Source Contributors** - For the various open source tools and libraries used in this project
 
 <div align="right">
 
